@@ -1,20 +1,7 @@
 version: "3"
 services:
-  mysql:
-    image: rabbitmq:freezippo/rabbitmq-3-management
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: bengal
-    volumes:
-      - ./.data/mysql:/var/lib/mysql
-      - ./mysql/initdb:/docker-entrypoint-initdb.d
+  queue:
+    image: rabbitmq:3.7.26-management-alpine
     ports:
-      - 3308:3306
-  mailhog:
-    build:
-      context: .
-      dockerfile: ./mailhog/Dockerfile
-    ports:
-      - 1025:1025
-      - 8025:8025
+      - 32775:5672
+      - 15672:15672
